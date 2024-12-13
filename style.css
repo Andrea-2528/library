@@ -15,7 +15,7 @@ svg{
 }
 
 dialog::backdrop{
-    backdrop-filter: blur(8px);
+    /* backdrop-filter: blur(8px); */
 }
 
 
@@ -42,7 +42,7 @@ dialog::backdrop{
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-.card{
+.book-card{
     border: 1px solid black;
     border-radius: 20px;
     background-color: saddlebrown;

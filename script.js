@@ -1,6 +1,7 @@
 const myLibrary = [];
 const openButton = document.querySelector("[data-open-modal]"); //Grabs dialog open button from document
 const modal = document.querySelector("[data-modal]")            //Grabs dialog from document
+const shelf = document.querySelector(".shelf");                 //Grabs the shelf div on which books will be displayed
 
 //Note that here the querySelector is for "modal", because the submit button is inside there
 //It's selected by searching it's attribute value and filtering the "cancel" button the same way
@@ -47,6 +48,7 @@ submitButton.addEventListener("click", (event) => {             //On submit:
             break;
     }
 
+    
     // Calls addBook function
     addBookToLibrary(title, author, pages, status);
 
@@ -55,10 +57,6 @@ submitButton.addEventListener("click", (event) => {             //On submit:
     form.reset();
 
 });
-
-
-
-//Defines the Book object
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -70,64 +68,74 @@ function Book(title, author, pages, read) {
     }
 }
 
-//Creates a new Book (obj) and adds it to the library (array)
-
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
-    addBooksToShelf(myLibrary.length);
+    addBooksToShelf();
 }
 
-//Loops through all myLibrary array and adds every book it finds to the shelf 
 
-function addBooksToShelf(length) {
+function addBooksToShelf() {
 
-    const shelf = document.querySelector(".shelf");
+    shelf.innerHTML = "";       //Clears the shelf
 
-    let position = length - 1;
+    myLibrary.forEach((book, index) => {
+        const bookCard = document.createElement("div");
+        bookCard.classList.add("book-card")
+        bookCard.dataset.index = index;
 
-    //Connect to HTML elements (existing and non)
-    const bookCard = document.createElement("div");
-    bookCard.className = "card";
-    bookCard.dataset.index = `${position}`;         //Sets a data-attribute called "index" with value ${position}
-    const bookTitle = document.createElement("h2");
-    const bookDelete = document.createElement("button");
-    bookDelete.dataset.index = `${position}`;       //Sets the same data-attribute on the button
-    const bookAuthor = document.createElement("h3");
-    const bookPages = document.createElement("p");
-    const bookRead = document.createElement("p");
+        const bookTitle = document.createElement("h2");
+        bookTitle.textContent = book.title;
+        bookCard.appendChild(bookTitle);
 
-    //Appending all elements inside the card
-    bookCard.appendChild(bookTitle);
-    bookCard.appendChild(bookDelete);
-    bookCard.appendChild(bookAuthor);
-    bookCard.appendChild(bookPages);
-    bookCard.appendChild(bookRead);
+        const bookDelete = document.createElement("button");
+        bookDelete.dataset.index = index;
+        bookDelete.textContent = "Remove";
+        bookDelete.addEventListener("click", () => {
+            myLibrary.splice(index, 1);
+            addBooksToShelf();
+        });
+        bookCard.appendChild(bookDelete);
 
-    //Assigning all values of the card's elements
+        const bookAuthor = document.createElement("h3");
+        bookAuthor.textContent = book.author;
+        bookCard.appendChild(bookAuthor);
 
-    bookTitle.textContent = myLibrary[position].title;
-    bookDelete.textContent = "Remove";
-    bookAuthor.textContent = myLibrary[position].author;
-    bookPages.textContent = myLibrary[position].pages;
-    bookRead.textContent = myLibrary[position].read;
+        const bookPages = document.createElement("p");
+        bookPages.textContent = book.pages;
+        bookCard.appendChild(bookPages);
 
-    //Appending the card to the shelf
-    shelf.appendChild(bookCard);
+        const bookRead = document.createElement("p");
+        bookRead.dataset.index = index;
+        bookRead.textContent = book.read;
+        bookCard.appendChild(bookRead);
 
-    //Managing remove button
-    const removeButton = document.querySelector(`button[data-index="${position}"]`);    //Grabs created remove button
+        const bookToggleRead = document.createElement("button");
+        bookToggleRead.classList.add("status");
+        bookToggleRead.textContent = "Status";
+        bookToggleRead.addEventListener("click", () => {
+            const currentStatus = myLibrary[index].read;
+            switch (currentStatus) {
+                case "Read":
+                    myLibrary[index].read = "Not read";
+                    bookRead.textContent = "Not read";
+                    break;
+                case "Not read":
+                    myLibrary[index].read = "Reading";
+                    bookRead.textContent = "Reading";
+                    break;
+                case "Reading":
+                    myLibrary[index].read = "Read";
+                    bookRead.textContent = "Read";
+                    break;
+            }
+        });
+        bookCard.appendChild(bookToggleRead);
 
-    removeButton.addEventListener("click", () => {      //When remove is clicked:
-        myLibrary.splice(position, 1);                  //Splice the array at the position index
-        removeBook(position);                           //Call the removeBook function
-    })
+        shelf.appendChild(bookCard);
+    });
 }
 
-function removeBook(position){
-    const bookToRemove = document.querySelector(`.card[data-index="${position}"]`); //Grabs the card div with the specified data-index
-    bookToRemove.remove();                                                          //Removes the card from the DOM
-}
 
 
 
