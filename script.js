@@ -3,9 +3,11 @@ const openButton = document.querySelector("[data-open-modal]"); //Grabs dialog o
 const modal = document.querySelector("[data-modal]")            //Grabs dialog from document
 const shelf = document.querySelector(".shelf");                 //Grabs the shelf div on which books will be displayed
 
-//Note that here the querySelector is for "modal", because the submit button is inside there
-//It's selected by searching it's attribute value and filtering the "cancel" button the same way
-const submitButton = modal.querySelector('button[type="submit"]:not([formmethod="dialog"])');
+const cancelButton = modal.querySelector('button[formmethod="dialog"]');
+cancelButton.addEventListener("click", () => {
+    modal.close();
+});
+const submitButton = modal.querySelector('button[type="submit"]');
 const form = modal.querySelector("form");                       //Grabs the form from the modal
 form.addEventListener("input", () => {
     const isValid = form.checkValidity(); // Checks all inputs
