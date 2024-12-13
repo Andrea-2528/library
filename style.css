@@ -1,0 +1,51 @@
+*{
+    /* margin: 0;
+    padding: 0;     */
+    border: 1px solid magenta;
+}
+
+body,
+html{
+    background-color: darkred;
+}
+
+svg{
+    width: 64px;
+    fill: white;
+}
+
+dialog::backdrop{
+    backdrop-filter: blur(8px);
+}
+
+
+.main{
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 1fr 8fr;
+}
+
+.header{
+    background-color: darkblue;
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.sidebar{
+    background-color: brown;
+    grid-row: 1/3;
+}
+
+.shelf{
+    background-color: dodgerblue;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card{
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: saddlebrown;
+}
+
+
