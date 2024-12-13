@@ -7,6 +7,10 @@ const shelf = document.querySelector(".shelf");                 //Grabs the shel
 //It's selected by searching it's attribute value and filtering the "cancel" button the same way
 const submitButton = modal.querySelector('button[type="submit"]:not([formmethod="dialog"])');
 const form = modal.querySelector("form");                       //Grabs the form from the modal
+form.addEventListener("input", () => {
+    const isValid = form.checkValidity(); // Checks all inputs
+    submitButton.disabled = !isValid;
+});
 
 openButton.addEventListener("click", () => {                    //On click, opens modal dialog
     modal.showModal();
@@ -55,6 +59,7 @@ submitButton.addEventListener("click", (event) => {             //On submit:
     //Closes the dialog (modal) and resets form
     modal.close();
     form.reset();
+    submitButton.disabled = !form.checkValidity();
 
 });
 
@@ -66,14 +71,13 @@ function Book(title, author, pages, read) {
     this.info = function () {
         return title + ", " + author + ", " + pages + ", " + read;
     }
-}
+};
 
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
     addBooksToShelf();
-}
-
+};
 
 function addBooksToShelf() {
 
@@ -134,9 +138,4 @@ function addBooksToShelf() {
 
         shelf.appendChild(bookCard);
     });
-}
-
-
-
-
-
+};

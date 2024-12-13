@@ -34,22 +34,23 @@
                             <div>
                                 <label for="book-title">Title</label>
                                 <input type="text" name="book-title" id="book-title" placeholder="Book's title"
-                                minlength="1" maxlength="256">
+                                minlength="1" maxlength="256" required title="Please enter a title">
                             </div>
                             <div>
                                 <label for="book-author">Author</label>
-                                <input type="text" name="book-author" id="book-author" placeholder="Book's author"
-                                minlength="1" maxlength="256">
+                                <input type="text" name="book-author" id="book-author" placeholder="Author's name"
+                                minlength="1" maxlength="256" required pattern="[a-zA-Z0-9 '.-]+" 
+                                title="Author names can only include letters, numbers, spaces, and basic punctuation ('.-).">
                             </div>
                             <div>
                                 <label for="book-pages">Pages</label>
-                                <input type="number" name="book-pages" id="book-pages" placeholder="Number of pages"
-                                minlength="1" maxlength="100000">
+                                <input type="tel" name="book-pages" id="book-pages" placeholder="Number of pages"
+                                minlength="1" required step="1" pattern="[1-9][0-9]*" title="Please enter a positive whole number.">
                             </div>
                             <fieldset>
                                 <legend>Have you read the book?</legend>
     
-                                <input type="radio" name="readStatus" id="read" checked>
+                                <input type="radio" name="readStatus" id="read" checked required>
                                 <label for="read">Yes I've read it.</label>
                                 
                                 <br><br>
@@ -65,7 +66,7 @@
                     </section>
                     <section class="form-buttons">
                         <button type="submit" formmethod="dialog">Cancel</button>
-                        <button type="submit">Add Book</button>
+                        <button type="submit" disabled>Add Book</button>
                     </section>
                 </form>
             </dialog>

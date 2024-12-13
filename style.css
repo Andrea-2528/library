@@ -15,7 +15,7 @@ svg{
 }
 
 dialog::backdrop{
-    /* backdrop-filter: blur(8px); */
+    backdrop-filter: blur(8px);
 }
 
 
