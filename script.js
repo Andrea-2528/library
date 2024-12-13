@@ -7,10 +7,6 @@ const modal = document.querySelector("[data-modal]")            //Grabs dialog f
 const submitButton = modal.querySelector('button[type="submit"]:not([formmethod="dialog"])');
 const form = modal.querySelector("form");                       //Grabs the form from the modal
 
-//ddddddddddddddddddddd
-const removeButton = document.querySelector("[data-index]");  //Grabs created remove button
-
-
 openButton.addEventListener("click", () => {                    //On click, opens modal dialog
     modal.showModal();
 });
@@ -27,7 +23,7 @@ modal.addEventListener("click", e => {                          //On click, clos
     }
 });
 
-submitButton.addEventListener('click', (event) => {             //On submit:
+submitButton.addEventListener("click", (event) => {             //On submit:
     // Prevents default submit to server
     event.preventDefault();
 
@@ -60,9 +56,6 @@ submitButton.addEventListener('click', (event) => {             //On submit:
 
 });
 
-removeButton.addEventListener("click", {
-    
-})
 
 
 //Defines the Book object
@@ -104,8 +97,6 @@ function addBooksToShelf(length) {
     const bookPages = document.createElement("p");
     const bookRead = document.createElement("p");
 
-
-
     //Appending all elements inside the card
     bookCard.appendChild(bookTitle);
     bookCard.appendChild(bookDelete);
@@ -123,6 +114,19 @@ function addBooksToShelf(length) {
 
     //Appending the card to the shelf
     shelf.appendChild(bookCard);
+
+    //Managing remove button
+    const removeButton = document.querySelector(`button[data-index="${position}"]`);    //Grabs created remove button
+
+    removeButton.addEventListener("click", () => {      //When remove is clicked:
+        myLibrary.splice(position, 1);                  //Splice the array at the position index
+        removeBook(position);                           //Call the removeBook function
+    })
+}
+
+function removeBook(position){
+    const bookToRemove = document.querySelector(`.card[data-index="${position}"]`); //Grabs the card div with the specified data-index
+    bookToRemove.remove();                                                          //Removes the card from the DOM
 }
 
 
