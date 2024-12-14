@@ -14,7 +14,7 @@
     <div class="main">
         <div class="header">
 
-            <h1>Library</h1>
+            <h1>LIBRARY</h1>
             <a href="https://github.com/Andrea-2528/library" target="_blank" rel="noreferrer noopener">
                 <svg viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -26,43 +26,43 @@
         </div>
         <div class="sidebar">
 
-            <button data-open-modal>Add Book</button>
+            <button class="add-book" data-open-modal>+</button>
 
             <dialog data-modal>
                 <form>
                     <section class="form-main">
-                            <div>
-                                <label for="book-title">Title</label>
-                                <input type="text" name="book-title" id="book-title" placeholder="Book's title"
+                        <div>
+                            <label for="book-title">Title</label>
+                            <input type="text" name="book-title" id="book-title" placeholder="Book's title"
                                 minlength="1" maxlength="256" required title="Please enter a title">
-                            </div>
-                            <div>
-                                <label for="book-author">Author</label>
-                                <input type="text" name="book-author" id="book-author" placeholder="Author's name"
-                                minlength="1" maxlength="256" required pattern="[a-zA-Z0-9 '.-]+" 
-                                title="Author names can only include letters, numbers, spaces, and basic punctuation ('.-).">
-                            </div>
-                            <div>
-                                <label for="book-pages">Pages</label>
-                                <input type="tel" name="book-pages" id="book-pages" placeholder="Number of pages"
-                                minlength="1" required step="1" pattern="[1-9][0-9]*" title="Please enter a positive whole number.">
-                            </div>
-                            <fieldset>
-                                <legend>Have you read the book?</legend>
-    
-                                <input type="radio" name="readStatus" id="read" checked required>
-                                <label for="read">Yes I've read it.</label>
-                                
-                                <br><br>
-    
-                                <input type="radio" name="readStatus" id="not-read">
-                                <label for="not-read">No I've not read it.</label>
+                        </div>
+                        <div>
+                            <label for="book-author">Author</label>
+                            <input type="text" name="book-author" id="book-author" placeholder="Author's name"
+                                minlength="1" maxlength="256" required title="Author names can only include letters, numbers, spaces, and basic punctuation ('.-).">
+                        </div>
+                        <div>
+                            <label for="book-pages">Pages</label>
+                            <input type="tel" name="book-pages" id="book-pages" placeholder="Number of pages"
+                                minlength="1" required step="1" pattern="[1-9][0-9]*"
+                                title="Please enter a positive whole number.">
+                        </div>
+                        <fieldset>
+                            <legend>Have you read the book?</legend>
 
-                                <br><br>
-    
-                                <input type="radio" name="readStatus" id="reading">
-                                <label for="reading">I'm still reading it.</label>    
-                            </fieldset>
+                            <input type="radio" name="readStatus" id="read" checked required>
+                            <label for="read">Yes I've read it.</label>
+
+                            <br><br>
+
+                            <input type="radio" name="readStatus" id="not-read">
+                            <label for="not-read">No I've not read it.</label>
+
+                            <br><br>
+
+                            <input type="radio" name="readStatus" id="reading">
+                            <label for="reading">I'm still reading it.</label>
+                        </fieldset>
                     </section>
                     <section class="form-buttons">
                         <button type="button" formmethod="dialog">Cancel</button>
